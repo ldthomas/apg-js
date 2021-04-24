@@ -9,7 +9,7 @@
 "use strict";
 let thisFileName = "utilities.js: ";
 let style = require("./style.js");
-let converter = require("apg-conv-api").converter;
+let converter = require("../apg-conv-api/converter.js");
 let _this = this;
 /* translate (implied) phrase beginning character and length to actual first and last character indexes */
 /* used by multiple phrase handling functions */
