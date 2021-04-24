@@ -58,7 +58,7 @@ let synName = function (result, chars, phraseIndex, data) {
 };
 module.exports = function (p, str) {
     let grammar = new (require("./replace-grammar.js"))();
-    let apglib = require("apg-lib");
+    let apglib = require("../apg-lib/node-exports.js");
     let parser = new apglib.parser();
     let data = {
         name: "",

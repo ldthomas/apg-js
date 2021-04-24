@@ -14,7 +14,7 @@
 module.exports = (function () {
     ("use strict");
     let util = require("util");
-    let id = require("apg-lib").ids;
+    let id = require("../apg-lib/node-exports.js").ids;
     let state = null; /* keep a global reference to the state for the show functions */
 
     /* scan the opcodes of the indexed rule and discover which rules it references and which rule refer back to it */

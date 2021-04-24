@@ -13,7 +13,7 @@
 module.exports = function () {
     "use strict";
     let thisFileName = "parser.js: ";
-    let apglib = require("apg-lib");
+    let apglib = require("../apg-lib/node-exports.js");
     let id = apglib.ids;
     let syn = new (require("./syntax-callbacks.js"))();
     let sem = new (require("./semantic-callbacks.js"))();

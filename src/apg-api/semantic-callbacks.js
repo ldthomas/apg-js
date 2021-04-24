@@ -10,7 +10,7 @@
 //for the grammar file these callback functions are based on.
 module.exports = function (grammar) {
     "use strict";
-    let apglib = require("apg-lib");
+    let apglib = require("../apg-lib/node-exports.js");
     let id = apglib.ids;
 
     /* Some helper functions. */

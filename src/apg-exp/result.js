@@ -6,7 +6,7 @@
 // This module defines all of the display functions. Text and HTML displays of
 // the grammar source, the result object and the `apg-exp` "last match" object.
 "use strict;";
-let apglib = require("apg-lib");
+let apglib = require("../apg-lib/node-exports.js");
 let utils = apglib.utils;
 let style = apglib.style;
 let MODE_HEX = 16;

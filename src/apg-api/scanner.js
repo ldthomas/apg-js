@@ -17,7 +17,7 @@
 module.exports = function (chars, errors, strict, trace) {
     "use strict";
     let thisFileName = "scanner.js: ";
-    let apglib = require("apg-lib");
+    let apglib = require("../apg-lib/node-exports.js");
     let grammar = new (require("./scanner-grammar.js"))();
     let callbacks = require("./scanner-callbacks").callbacks;
 

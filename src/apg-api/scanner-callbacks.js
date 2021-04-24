@@ -6,7 +6,7 @@
 // These are the AST translation callback functions used by the scanner
 // to analyze the characters and lines.
 "use strict";
-let apglib = require("apg-lib");
+let apglib = require("../apg-lib/node-exports.js");
 let id = apglib.ids;
 function semLine(state, chars, phraseIndex, phraseCount, data) {
     if (state == id.SEM_PRE) {

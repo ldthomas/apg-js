@@ -54,7 +54,7 @@
 // S and A are dependent on one another and are mutually recursive.
 module.exports = (function () {
     "use strict";
-    let id = require("apg-lib").ids;
+    let id = require("../apg-lib/node-exports.js").ids;
     let { ruleAttributes, showAttributes, showAttributeErrors } = require("./rule-attributes.js");
     let { ruleDependencies, showRuleDependencies } = require("./rule-dependencies.js");
     class State {

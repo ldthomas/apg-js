@@ -10,7 +10,7 @@
 module.exports = function () {
     "use strict";
     let thisFileName = "syntax-callbacks.js: ";
-    let apglib = require("apg-lib");
+    let apglib = require("../apg-lib/node-exports.js");
     let id = apglib.ids;
     let topAlt;
     /* syntax, RNM, callback functions */

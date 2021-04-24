@@ -6,7 +6,7 @@
 // This module does the heavy lifting for attribute generation.
 module.exports = (function () {
     "use strict";
-    let id = require("apg-lib").ids;
+    let id = require("../apg-lib/node-exports.js").ids;
     let thisFile = "rule-attributes.js";
     let state = null;
     function isEmptyOnly(attr) {

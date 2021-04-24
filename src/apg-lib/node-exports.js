@@ -6,7 +6,7 @@
 // This module serves to export all library objects and object constructors with the `require("apg-lib")` statement.
 // For example, to create a new parser in your program,
 //````
-// let apglib = require("apg-lib");
+// let apglib = require("../apg-lib/node-exports.js");
 // let my-parser = new apglib.parser();
 //````
 module.exports = {
