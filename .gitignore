@@ -1,0 +1,17 @@
+.*
+!.gitignore
+*~
+*.log
+*.out
+*.zip
+*.tgz
+*.html
+**html/
+!dist/guide/*
+**node_modules/
+**docs/
+**input/
+**output/
+**tmp/
+**test/
+
