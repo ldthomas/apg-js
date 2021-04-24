@@ -2,7 +2,7 @@
 
 ## What's New
 
-`apg-js` obsoletes `apg`, `apg-lib`, `apg-exp`, `apg-conv`, `apg-conv-api` and `apg-api`. It changes them in two significant ways.
+`apg-js` obsoletes `apg-js2`, `apg-js2-lib`, `apg-js2-exp`, `apg-js2-api`, `apg-conv` and `apg-conv-api`. It changes them in two significant ways.
 
 -   It fixes a major problem in the attributes algorithm. Previous versions could fail on large grammars with many or large sets of mutually-recursive rules.
 -   It combines all of those packages into a single, easier to manage and maintain package.
