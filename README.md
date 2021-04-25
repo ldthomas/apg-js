@@ -11,18 +11,10 @@
 
 `apg-js` is the JavaScript version of APG, an ABNF Parser Generator. APG generates recursive-descent parsers directly from a superset of [ABNF](https://tools.ietf.org/html/rfc5234) (SABNF). Visit the [APG](https://sabnf.com/`) website for a complete [overview](https://sabnf.com/overview/) of APG and SABNF.
 
-## Installation
-
-> `npm install apg-js`
-
-or
-
-> `git clone https://github.com/ldthomas/apg-js.git`
-
 ## Documentation
 
 This package is meant to assist other parsing applications and is normally not installed by itself, rather installed along with those other applications. For details and many examples of using of the libraries, both in node.js and browser applications, see `apg-js-examples` at [GitHub](https://github.com/ldthomas/apg-js-examples) or [npmjs](https://www.npmjs.com/package/apg-js-examples).
-However, it does provide access to two, node.js applications.
+However, it does provide access to two, node.js applications, `apg` and `apg-conv`.
 
 ### Applications
 
