@@ -74,4 +74,4 @@ npm install -g docco@0.8.1
 ```
 
 (Higher versions of docco may work, but some lower versions definitely do not.)
-The documentation is then at `./docs/index.html` or see it [here](https://sabnf.com/docs/java-script/apg-exp-guide/index.html) at the [APG](https://sabnf.com/) website.
+The documentation is then at `./docs/index.html` or see it [here](https://sabnf.com/docs/apg-js/) at the [APG](https://sabnf.com/) website.
