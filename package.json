@@ -1,6 +1,6 @@
 {
   "name": "apg-js",
-  "version": "4.0.2",
+  "version": "4.1.0",
   "description": "JavaScript APG, an ABNF Parser Generator",
   "main": "index.js",
   "scripts": {
@@ -42,5 +42,12 @@
   "bugs": {
     "url": "https://github.com/ldthomas/apg-js/issues"
   },
-  "homepage": "https://github.com/ldthomas/apg-js#readme"
+  "homepage": "https://github.com/ldthomas/apg-js#readme",
+  "devDependencies": {
+    "eslint": "^7.26.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "prettier": "^2.3.0"
+  }
 }

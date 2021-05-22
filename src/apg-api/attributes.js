@@ -1,8 +1,8 @@
+/* eslint-disable class-methods-use-this */
 /*  *************************************************************************************
  *   copyright: Copyright (c) 2021 Lowell D. Thomas, all rights reserved
  *     license: BSD-2-Clause (https://opensource.org/licenses/BSD-2-Clause)
- *     website: https://sabnf.com/
- *   ***********************************************************************************/
+ *   ********************************************************************************* */
 // Attributes Validation
 //
 // It is well known that recursive-descent parsers will fail if a rule is left recursive.
@@ -52,183 +52,197 @@
 // A = "x" S "y" / "z"
 //
 // S and A are dependent on one another and are mutually recursive.
-module.exports = (function () {
-    "use strict";
-    let id = require("../apg-lib/node-exports.js").ids;
-    let { ruleAttributes, showAttributes, showAttributeErrors } = require("./rule-attributes.js");
-    let { ruleDependencies, showRuleDependencies } = require("./rule-dependencies.js");
-    class State {
-        constructor(rules, udts) {
-            this.rules = rules;
-            this.udts = udts;
-            this.ruleCount = rules.length;
-            this.udtCount = udts.length;
-            this.startRule = 0;
-            this.dependenciesComplete = false;
-            this.attributesComplete = false;
-            this.isMutuallyRecursive = false;
-            this.ruleIndexes = this.indexArray(this.ruleCount);
-            this.ruleAlphaIndexes = this.indexArray(this.ruleCount);
-            this.ruleTypeIndexes = this.indexArray(this.ruleCount);
-            this.udtIndexes = this.indexArray(this.udtCount);
-            this.udtAlphaIndexes = this.indexArray(this.udtCount);
-            this.attrsErrorCount = 0;
-            this.attrs = [];
-            this.attrsErrors = [];
-            this.attrsWorking = [];
-            this.ruleDeps = [];
-            for (let i = 0; i < this.ruleCount; i++) {
-                this.attrs.push(this.attrGen(this.rules[i]));
-                this.attrsWorking.push(this.attrGen(this.rules[i]));
-                this.ruleDeps.push(this.rdGen(rules[i], this.ruleCount, this.udtCount));
-            }
-            this.compRulesAlpha = this.compRulesAlpha.bind(this);
-            this.compUdtsAlpha = this.compUdtsAlpha.bind(this);
-            this.compRulesType = this.compRulesType.bind(this);
-            this.compRulesGroup = this.compRulesGroup.bind(this);
-        }
-        attrGen(rule) {
-            return {
-                left: false,
-                nested: false,
-                right: false,
-                empty: false,
-                finite: false,
-                cyclic: false,
-                leaf: false,
-                isOpen: false,
-                isComplete: false,
-                rule: rule,
-            };
-        }
-        attrInit(attr) {
-            attr.left = false;
-            attr.nested = false;
-            attr.right = false;
-            attr.empty = false;
-            attr.finite = false;
-            attr.cyclic = false;
-            attr.leaf = false;
-            attr.isOpen = false;
-            attr.isComplete = false;
-        }
-        attrCopy(dst, src) {
-            dst.left = src.left;
-            dst.nested = src.nested;
-            dst.right = src.right;
-            dst.empty = src.empty;
-            dst.finite = src.finite;
-            dst.cyclic = src.cyclic;
-            dst.leaf = src.leaf;
-            dst.isOpen = src.isOpen;
-            dst.isComplete = src.isComplete;
-            dst.rule = src.rule;
-        }
-        rdGen(rule, ruleCount, udtCount) {
-            ret = {
-                rule: rule,
-                recursiveType: id.ATTR_N,
-                groupNumber: -1,
-                refersTo: this.falseArray(ruleCount),
-                refersToUdt: this.falseArray(udtCount),
-                referencedBy: this.falseArray(ruleCount),
-            };
-            return ret;
-        }
-        typeToString(recursiveType) {
-            switch (recursiveType) {
-                case id.ATTR_N:
-                    return " N";
-                case id.ATTR_R:
-                    return " R";
-                case id.ATTR_MR:
-                    return "MR";
-                default:
-                    return "UNKNOWN";
-            }
-        }
-        falseArray(length) {
-            let ret = [];
-            if (length > 0) {
-                for (let i = 0; i < length; i++) {
-                    ret.push(false);
-                }
-            }
-            return ret;
-        }
-        falsifyArray(a) {
-            for (let i = 0; i < a.length; i++) {
-                a[i] = false;
-            }
-        }
-        indexArray(length) {
-            let ret = [];
-            if (length > 0) {
-                for (let i = 0; i < length; i++) {
-                    ret.push(i);
-                }
-            }
-            return ret;
-        }
-        compRulesAlpha(left, right) {
-            if (this.rules[left].lower < this.rules[right].lower) {
-                return -1;
-            }
-            if (this.rules[left].lower > this.rules[right].lower) {
-                return 1;
-            }
-            return 0;
-        }
-        compUdtsAlpha(left, right) {
-            if (this.udts[left].lower < this.udts[right].lower) {
-                return -1;
-            }
-            if (this.udts[left].lower > this.udts[right].lower) {
-                return 1;
-            }
-            return 0;
-        }
-        compRulesType(left, right) {
-            if (this.ruleDeps[left].recursiveType < this.ruleDeps[right].recursiveType) {
-                return -1;
-            }
-            if (this.ruleDeps[left].recursiveType > this.ruleDeps[right].recursiveType) {
-                return 1;
-            }
-            return 0;
-        }
-        compRulesGroup(left, right) {
-            if (this.ruleDeps[left].recursiveType === id.ATTR_MR && this.ruleDeps[right].recursiveType === id.ATTR_MR) {
-                if (this.ruleDeps[left].groupNumber < this.ruleDeps[right].groupNumber) {
-                    return -1;
-                }
-                if (this.ruleDeps[left].groupNumber > this.ruleDeps[right].groupNumber) {
-                    return 1;
-                }
-            }
-            return 0;
-        }
+module.exports = (function exportAttributes() {
+  const id = require('../apg-lib/identifiers');
+  const { ruleAttributes, showAttributes, showAttributeErrors } = require('./rule-attributes');
+  const { ruleDependencies, showRuleDependencies } = require('./rule-dependencies');
+  class State {
+    constructor(rules, udts) {
+      this.rules = rules;
+      this.udts = udts;
+      this.ruleCount = rules.length;
+      this.udtCount = udts.length;
+      this.startRule = 0;
+      this.dependenciesComplete = false;
+      this.attributesComplete = false;
+      this.isMutuallyRecursive = false;
+      this.ruleIndexes = this.indexArray(this.ruleCount);
+      this.ruleAlphaIndexes = this.indexArray(this.ruleCount);
+      this.ruleTypeIndexes = this.indexArray(this.ruleCount);
+      this.udtIndexes = this.indexArray(this.udtCount);
+      this.udtAlphaIndexes = this.indexArray(this.udtCount);
+      this.attrsErrorCount = 0;
+      this.attrs = [];
+      this.attrsErrors = [];
+      this.attrsWorking = [];
+      this.ruleDeps = [];
+      for (let i = 0; i < this.ruleCount; i += 1) {
+        this.attrs.push(this.attrGen(this.rules[i]));
+        this.attrsWorking.push(this.attrGen(this.rules[i]));
+        this.ruleDeps.push(this.rdGen(rules[i], this.ruleCount, this.udtCount));
+      }
+      this.compRulesAlpha = this.compRulesAlpha.bind(this);
+      this.compUdtsAlpha = this.compUdtsAlpha.bind(this);
+      this.compRulesType = this.compRulesType.bind(this);
+      this.compRulesGroup = this.compRulesGroup.bind(this);
     }
-    let attributes = function (rules = [], udts = [], lineMap = [], errors = []) {
-        let i = 0;
-        // Initialize the state. The state of the computation get passed around to multiple functions in multiple files.
-        let state = new State(rules, udts);
 
-        // Determine all rule dependencies
-        //  - which rules each rule refers to
-        //  - which rules reference each rule
-        ruleDependencies(state);
+    // eslint-disable-next-line class-methods-use-this
+    attrGen(rule) {
+      return {
+        left: false,
+        nested: false,
+        right: false,
+        empty: false,
+        finite: false,
+        cyclic: false,
+        leaf: false,
+        isOpen: false,
+        isComplete: false,
+        rule,
+      };
+    }
 
-        // Determine the attributes for each rule.
-        ruleAttributes(state);
-        if (state.attrsErrorCount) {
-            errors.push({ line: 0, char: 0, msg: `${state.attrsErrorCount} attribute errors` });
+    // eslint-disable-next-line class-methods-use-this
+    attrInit(attr) {
+      attr.left = false;
+      attr.nested = false;
+      attr.right = false;
+      attr.empty = false;
+      attr.finite = false;
+      attr.cyclic = false;
+      attr.leaf = false;
+      attr.isOpen = false;
+      attr.isComplete = false;
+    }
+
+    attrCopy(dst, src) {
+      dst.left = src.left;
+      dst.nested = src.nested;
+      dst.right = src.right;
+      dst.empty = src.empty;
+      dst.finite = src.finite;
+      dst.cyclic = src.cyclic;
+      dst.leaf = src.leaf;
+      dst.isOpen = src.isOpen;
+      dst.isComplete = src.isComplete;
+      dst.rule = src.rule;
+    }
+
+    rdGen(rule, ruleCount, udtCount) {
+      const ret = {
+        rule,
+        recursiveType: id.ATTR_N,
+        groupNumber: -1,
+        refersTo: this.falseArray(ruleCount),
+        refersToUdt: this.falseArray(udtCount),
+        referencedBy: this.falseArray(ruleCount),
+      };
+      return ret;
+    }
+
+    typeToString(recursiveType) {
+      switch (recursiveType) {
+        case id.ATTR_N:
+          return ' N';
+        case id.ATTR_R:
+          return ' R';
+        case id.ATTR_MR:
+          return 'MR';
+        default:
+          return 'UNKNOWN';
+      }
+    }
+
+    falseArray(length) {
+      const ret = [];
+      if (length > 0) {
+        for (let i = 0; i < length; i += 1) {
+          ret.push(false);
         }
+      }
+      return ret;
+    }
 
-        // Return the number of attribute errors to the caller.
-        return state.attrsErrorCount;
-    };
+    falsifyArray(a) {
+      for (let i = 0; i < a.length; i += 1) {
+        a[i] = false;
+      }
+    }
 
-    /* Destructuring assignment - see MDN Web Docs */
-    return { attributes, showAttributes, showAttributeErrors, showRuleDependencies };
+    indexArray(length) {
+      const ret = [];
+      if (length > 0) {
+        for (let i = 0; i < length; i += 1) {
+          ret.push(i);
+        }
+      }
+      return ret;
+    }
+
+    compRulesAlpha(left, right) {
+      if (this.rules[left].lower < this.rules[right].lower) {
+        return -1;
+      }
+      if (this.rules[left].lower > this.rules[right].lower) {
+        return 1;
+      }
+      return 0;
+    }
+
+    compUdtsAlpha(left, right) {
+      if (this.udts[left].lower < this.udts[right].lower) {
+        return -1;
+      }
+      if (this.udts[left].lower > this.udts[right].lower) {
+        return 1;
+      }
+      return 0;
+    }
+
+    compRulesType(left, right) {
+      if (this.ruleDeps[left].recursiveType < this.ruleDeps[right].recursiveType) {
+        return -1;
+      }
+      if (this.ruleDeps[left].recursiveType > this.ruleDeps[right].recursiveType) {
+        return 1;
+      }
+      return 0;
+    }
+
+    compRulesGroup(left, right) {
+      if (this.ruleDeps[left].recursiveType === id.ATTR_MR && this.ruleDeps[right].recursiveType === id.ATTR_MR) {
+        if (this.ruleDeps[left].groupNumber < this.ruleDeps[right].groupNumber) {
+          return -1;
+        }
+        if (this.ruleDeps[left].groupNumber > this.ruleDeps[right].groupNumber) {
+          return 1;
+        }
+      }
+      return 0;
+    }
+  }
+  // eslint-disable-next-line no-unused-vars
+  const attributes = function attributes(rules = [], udts = [], lineMap = [], errors = []) {
+    // let i = 0;
+    // Initialize the state. The state of the computation get passed around to multiple functions in multiple files.
+    const state = new State(rules, udts);
+
+    // Determine all rule dependencies
+    //  - which rules each rule refers to
+    //  - which rules reference each rule
+    ruleDependencies(state);
+
+    // Determine the attributes for each rule.
+    ruleAttributes(state);
+    if (state.attrsErrorCount) {
+      errors.push({ line: 0, char: 0, msg: `${state.attrsErrorCount} attribute errors` });
+    }
+
+    // Return the number of attribute errors to the caller.
+    return state.attrsErrorCount;
+  };
+
+  /* Destructuring assignment - see MDN Web Docs */
+  return { attributes, showAttributes, showAttributeErrors, showRuleDependencies };
 })();
