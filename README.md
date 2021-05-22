@@ -4,8 +4,17 @@
 
 `apg-js` obsoletes `apg-js2`, `apg-js2-lib`, `apg-js2-exp`, `apg-js2-api`, `apg-conv` and `apg-conv-api`. It changes them in two significant ways.
 
--   It fixes a major problem in the attributes algorithm. Previous versions could fail on large grammars with many or large sets of mutually-recursive rules.
--   It combines all of those packages into a single, easier to manage and maintain package.
+- It fixes a major problem in the attributes algorithm. Previous versions could fail on large grammars with many or large sets of mutually-recursive rules.
+- It combines all of those packages into a single, easier to manage and maintain package.
+
+In version 4.1.0 and higher, all files have been updated for compliance with ESLint using the airbnb + prettier configurations.
+Use:
+
+```
+npm install --production apg-js
+```
+
+to prevent installation of ESLint development and configuration modules.
 
 ## Overview
 
