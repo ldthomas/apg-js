@@ -1,5 +1,7 @@
 .*
 !.gitignore
+!.eslintrc.json
+!.prettierrc
 *~
 *.log
 *.out
