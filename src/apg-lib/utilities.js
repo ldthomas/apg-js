@@ -390,8 +390,11 @@ exports.charToHex = function (char) {
     case 7:
       ch = `0${ch}`;
       break;
+    case 2:
     case 6:
       ch = `00${ch}`;
+      break;
+    case 4:
       break;
     case 5:
       ch = `000${ch}`;
