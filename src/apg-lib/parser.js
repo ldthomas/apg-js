@@ -179,6 +179,8 @@ module.exports = function parser() {
     const thisData = this;
     this.state = id.ACTIVE;
     this.phraseLength = 0;
+    this.ruleIndex = 0;
+    this.udtIndex = 0;
     this.lookAround = lookAround[lookAround.length - 1];
     this.uFrame = new backRef();
     this.pFrame = new backRef();
@@ -688,7 +690,7 @@ module.exports = function parser() {
     let saveFrame;
     const op = opcodes[opIndex];
     const rule = rules[op.index];
-    const callback = ruleCallbacks[op.index];
+    const callback = ruleCallbacks[rule.index];
     const notLookAround = !inLookAround();
     /* ignore AST and back references in lookaround */
     if (notLookAround) {
@@ -714,6 +716,7 @@ module.exports = function parser() {
     } else {
       /* call user's callback */
       const charsLeft = charsEnd - phraseIndex;
+      sysData.ruleIndex = rule.index;
       callback(sysData, chars, phraseIndex, syntaxData);
       validateRnmCallbackResult(rule, sysData, charsLeft, true);
       if (sysData.state === id.ACTIVE) {
@@ -721,6 +724,7 @@ module.exports = function parser() {
         opcodes = rule.opcodes;
         opExecute(0, phraseIndex, sysData);
         opcodes = savedOpcodes;
+        sysData.ruleIndex = rule.index;
         callback(sysData, chars, phraseIndex, syntaxData);
         validateRnmCallbackResult(rule, sysData, charsLeft, false);
       } /* implied else clause: just accept the callback sysData - RNM acting as UDT */
@@ -731,7 +735,7 @@ module.exports = function parser() {
         if (sysData.state === id.NOMATCH) {
           thisThis.ast.setLength(astLength);
         } else {
-          thisThis.ast.up(op.index, rules[op.index].name, phraseIndex, sysData.phraseLength);
+          thisThis.ast.up(op.index, rule.name, phraseIndex, sysData.phraseLength);
         }
       }
       /* end back reference */
@@ -739,11 +743,11 @@ module.exports = function parser() {
       if (sysData.state === id.NOMATCH) {
         sysData.uFrame.pop(ulen);
         sysData.pFrame.pop(plen);
-      } else if (rules[op.index].isBkr) {
+      } else if (rule.isBkr) {
         /* save phrase on both the parent and universal frames */
         /* BKR operator will decide which to use later */
-        sysData.pFrame.savePhrase(rules[op.index].lower, phraseIndex, sysData.phraseLength);
-        sysData.uFrame.savePhrase(rules[op.index].lower, phraseIndex, sysData.phraseLength);
+        sysData.pFrame.savePhrase(rule.lower, phraseIndex, sysData.phraseLength);
+        sysData.uFrame.savePhrase(rule.lower, phraseIndex, sysData.phraseLength);
       }
     }
   };
@@ -793,12 +797,14 @@ module.exports = function parser() {
   const opUDT = function (opIndex, phraseIndex, sysData) {
     let astLength;
     let astIndex;
-    let udt;
     let astDefined;
     let ulen;
     let plen;
     let saveFrame;
     const op = opcodes[opIndex];
+    const udt = udts[op.index];
+    sysData.UdtIndex = udt.index;
+
     const notLookAround = !inLookAround();
     /* ignore AST and back references in lookaround */
     if (notLookAround) {
@@ -807,7 +813,7 @@ module.exports = function parser() {
       if (astDefined) {
         astIndex = rules.length + op.index;
         astLength = thisThis.ast.getLength();
-        thisThis.ast.down(astIndex, udts[op.index].name);
+        thisThis.ast.down(astIndex, udt.name);
       }
       /* NOTE: push and pop of the back reference frame is normally not necessary */
       /* only in the case that the UDT calls evaluateRule() or evaluateUdt() */
@@ -821,14 +827,14 @@ module.exports = function parser() {
     /* call the UDT */
     const charsLeft = charsEnd - phraseIndex;
     udtCallbacks[op.index](sysData, chars, phraseIndex, syntaxData);
-    validateUdtCallbackResult(udts[op.index], sysData, charsLeft);
+    validateUdtCallbackResult(udt, sysData, charsLeft);
     if (notLookAround) {
       /* end AST */
       if (astDefined) {
         if (sysData.state === id.NOMATCH) {
           thisThis.ast.setLength(astLength);
         } else {
-          thisThis.ast.up(astIndex, udts[op.index].name, phraseIndex, sysData.phraseLength);
+          thisThis.ast.up(astIndex, udt.name, phraseIndex, sysData.phraseLength);
         }
       }
       /* end back reference */
@@ -836,11 +842,11 @@ module.exports = function parser() {
       if (sysData.state === id.NOMATCH) {
         sysData.uFrame.pop(ulen);
         sysData.pFrame.pop(plen);
-      } else if (udts[op.index].isBkr) {
+      } else if (udt.isBkr) {
         /* save phrase on both the parent and universal frames */
         /* BKR operator will decide which to use later */
-        sysData.pFrame.savePhrase(udt[op.index].lower, phraseIndex, sysData.phraseLength);
-        sysData.uFrame.savePhrase(udt[op.index].lower, phraseIndex, sysData.phraseLength);
+        sysData.pFrame.savePhrase(udt.lower, phraseIndex, sysData.phraseLength);
+        sysData.uFrame.savePhrase(udt.lower, phraseIndex, sysData.phraseLength);
       }
     }
   };

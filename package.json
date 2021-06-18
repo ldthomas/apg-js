@@ -1,6 +1,6 @@
 {
   "name": "apg-js",
-  "version": "4.1.0",
+  "version": "4.1.1",
   "description": "JavaScript APG, an ABNF Parser Generator",
   "main": "index.js",
   "scripts": {
