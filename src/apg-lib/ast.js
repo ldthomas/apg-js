@@ -190,7 +190,7 @@ module.exports = function exportsAst() {
   this.toXml = function toSml(modeArg) {
     let display = utils.charsToDec;
     let caption = 'decimal integer character codes';
-    if (typeof mode === 'string' && modeArg.length >= 3) {
+    if (typeof modeArg === 'string' && modeArg.length >= 3) {
       const mode = modeArg.slice(0, 3).toLowerCase();
       if (mode === 'asc') {
         display = utils.charsToAscii;
