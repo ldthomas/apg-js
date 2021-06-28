@@ -33,11 +33,10 @@ module.exports = function apg(args) {
   const thisFileName = 'apg.js: ';
   const util = require('util');
   function logErrors(api, header) {
-    console.log('\n');
-    console.log(`${header}:`);
-    console.log(api.errorsToAscii());
     console.log('\nORIGINAL GRAMMAR:');
     console.log(api.linesToAscii());
+    console.log(`\n${header}:`);
+    console.log(api.errorsToAscii());
   }
   try {
     /* Get command line parameters and set up the configuration accordingly. */
