@@ -58,7 +58,7 @@ module.exports = function exports() {
     }
     return num;
   };
-  /* converts text hexidecimal numbers from, e.g. %xff, to an integer */
+  /* converts text hexadecimal numbers from, e.g. %xff, to an integer */
   const hexnum = function hexnum(chars, beg, len) {
     let num = 0;
     for (let i = beg; i < beg + len; i += 1) {

@@ -381,7 +381,7 @@ exports.asciiChars = [
   '~',
   'DEL',
 ];
-// Translates a single character to hexidecimal with leading zeros for 2, 4, or 8 digit display.
+// Translates a single character to hexadecimal with leading zeros for 2, 4, or 8 digit display.
 exports.charToHex = function (char) {
   let ch = char.toString(16).toUpperCase();
   switch (ch.length) {
@@ -419,7 +419,7 @@ exports.charsToDec = function (chars, beg, len) {
   }
   return ret;
 };
-// Translates a sub-array of character codes to hexidecimal display format.
+// Translates a sub-array of character codes to hexadecimal display format.
 exports.charsToHex = function (chars, beg, len) {
   let ret = '';
   if (!Array.isArray(chars)) {

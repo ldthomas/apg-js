@@ -366,7 +366,7 @@ const modeToText = function modeToText(mode) {
       txt = 'ascii';
       break;
     case MODE_HEX:
-      txt = 'hexidecimal';
+      txt = 'hexadecimal';
       break;
     case MODE_DEC:
       txt = 'decimal';
