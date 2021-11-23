@@ -671,7 +671,7 @@ module.exports = function exportTrace() {
     let modeName;
     switch (mode) {
       case MODE_HEX:
-        modeName = 'hexidecimal';
+        modeName = 'hexadecimal';
         break;
       case MODE_DEC:
         modeName = 'decimal';
@@ -1133,7 +1133,7 @@ module.exports = function exportTrace() {
     return html;
   };
   // Translate the trace records to HTML format.
-  // - *modearg* - can be `"ascii"`, `"decimal"`, `"hexidecimal"` or `"unicode"`.
+  // - *modearg* - can be `"ascii"`, `"decimal"`, `"hexadecimal"` or `"unicode"`.
   // Determines the format of the string character code display.
   // - *caption* - optional caption for the HTML table.
   this.toHtml = function (modearg, caption) {

@@ -445,7 +445,7 @@ module.exports = function apgExp(input, flags, nodeHits, treeDepth) {
       /* mode:
             - "ascii", (default) display characters arrays as ASCII text
             - "decimal", display character arrays as decimal integers
-            - "hexidecimal", display character arrays as hexidecimal (\xHH) integers
+            - "hexadecimal", display character arrays as hexadecimal (\xHH) integers
             - "unicode", display character arrays as unicode (\uHH) integers
             return resultFuncs.u.expToText(this, mode);
             */

@@ -132,7 +132,7 @@ module.exports = function api(src) {
             html += CONTROL_END + INVALID_BEG;
             state = INVALID;
           }
-          /* display character as hexidecimal value */
+          /* display character as hexadecimal value */
           html += `\\x${apglib.utils.charToHex(ch)}`;
         }
       }

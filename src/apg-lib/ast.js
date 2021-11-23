@@ -184,7 +184,7 @@ module.exports = function exportsAst() {
   //      - default mode is "ascii"
   //      - can be: "ascii"
   //                "decimal"
-  //                "hexidecimal"
+  //                "hexadecimal"
   //                "unicode"
   // ```
   this.toXml = function toSml(modeArg) {
@@ -197,7 +197,7 @@ module.exports = function exportsAst() {
         caption = 'ASCII for printing characters, hex for non-printing';
       } else if (mode === 'hex') {
         display = utils.charsToHex;
-        caption = 'hexidecimal integer character codes';
+        caption = 'hexadecimal integer character codes';
       } else if (mode === 'uni') {
         display = utils.charsToUnicode;
         caption = 'Unicode UTF-32 integer character codes';
