@@ -2,7 +2,7 @@
  *   copyright: Copyright (c) 2021 Lowell D. Thomas, all rights reserved
  *     license: BSD-2-Clause (https://opensource.org/licenses/BSD-2-Clause)
  *   ********************************************************************************* */
-module.exports = (function exports() {
+module.exports = (function exfn() {
   const thisFileName = 'show-rules.js';
   // Display the rules.
   // This function may be called before the attributes calculation.

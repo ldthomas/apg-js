@@ -16,6 +16,8 @@ npm install --production apg-js
 
 to prevent installation of ESLint development and configuration modules.
 
+Version 4.1.2 replaces five instances of "module.exports = function exports(" with "module.exports = function exfn(". ESLint requires a name here but the name "exports" causes conflicts in some bundlers.
+
 ## Overview
 
 `apg-js` is the JavaScript version of APG, an ABNF Parser Generator. APG generates recursive-descent parsers directly from a superset of [ABNF](https://tools.ietf.org/html/rfc5234) (SABNF). Visit the [APG](https://sabnf.com/`) website for a complete [overview](https://sabnf.com/overview/) of APG and SABNF.

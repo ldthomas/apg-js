@@ -7,7 +7,7 @@
 // See:<br>
 // `./dist/abnf-for-sabnf-grammar.bnf`<br>
 // for the grammar file these callback functions are based on.
-module.exports = function exports() {
+module.exports = function exfn() {
   const thisFileName = 'syntax-callbacks.js: ';
   const apglib = require('../apg-lib/node-exports');
   const id = apglib.ids;

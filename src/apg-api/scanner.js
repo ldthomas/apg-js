@@ -13,7 +13,7 @@
 // - catalog the lines - create an array with a line object for each line.
 // The object carries information about the line number and character length which is used
 // by the parser generator primarily for error reporting.
-module.exports = function exports(chars, errors, strict, trace) {
+module.exports = function exfn(chars, errors, strict, trace) {
   const thisFileName = 'scanner.js: ';
   const apglib = require('../apg-lib/node-exports');
   const grammar = new (require('./scanner-grammar'))();

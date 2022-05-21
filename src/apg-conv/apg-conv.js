@@ -13,7 +13,7 @@
 // `./bin/apg-conv.sh --help`<br>
 // to see the options.
 
-module.exports = function exports() {
+module.exports = function exfn() {
   'use strict;';
 
   const SRC_FILEL = '--src';
