@@ -16,7 +16,7 @@ npm install --production apg-js
 
 to prevent installation of ESLint development and configuration modules.
 
-Version 4.1.2 replaces five instances of "module.exports = function exports(" with "module.exports = function exfn(". ESLint requires a name here but the name "exports" causes conflicts in some bundlers.
+Version 4.1.2 simply replaces five instances of "module.exports = function exports(" with "module.exports = function exfn(". ESLint requires a name here but the name "exports" causes conflicts in some bundlers.
 
 ## Overview
 
