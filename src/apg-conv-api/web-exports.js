@@ -9,6 +9,7 @@
 //   - transformers, the actual transformation functions
 //   - node.js Buffer global object
 (function webExports() {
+  const Buffer = require('safe-buffer').Buffer;
   const converter = require('./converter');
   globalThis.apgConv = {
     convert: converter.convert,

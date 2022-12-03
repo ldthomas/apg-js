@@ -13,6 +13,7 @@
 // `./bin/apg.sh -- help`<br>
 // to see all the options.
 module.exports = function commandLine(args) {
+  const Buffer = require('safe-buffer').Buffer;
   const fs = require('fs');
   const path = require('path');
   const converter = require('../apg-conv-api/converter');

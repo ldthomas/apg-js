@@ -13,6 +13,7 @@
 
 const thisThis = this;
 const trans = require('./transformers');
+const Buffer = require('safe-buffer').Buffer;
 
 /* types */
 const UTF8 = 'UTF8';

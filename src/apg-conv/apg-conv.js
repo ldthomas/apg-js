@@ -35,6 +35,7 @@ module.exports = function exfn() {
   let srcFile = '';
   let dstFile = '';
   let errFile = '';
+  const Buffer = require('safe-buffer').Buffer;
   const fs = require('fs');
   const api = require('../apg-conv-api/node-exports');
   const help = require('./help');

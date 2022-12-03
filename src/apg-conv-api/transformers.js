@@ -12,6 +12,8 @@
 
 const thisThis = this;
 
+const Buffer = require('safe-buffer').Buffer;
+
 /* decoding error codes */
 const NON_SHORTEST = 0xfffffffc;
 const TRAILING = 0xfffffffd;
