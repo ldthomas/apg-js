@@ -1,3 +1,5 @@
+This is a fork of JavaScript APG library, with the addition of 'safer-buffer' to replace usage of Node's Buffer API.
+
 # JavaScript APG
 
 ## What's New
