@@ -15,5 +15,5 @@
 **input/
 **output/
 **tmp/
-**test/
+**__tests__/
 
