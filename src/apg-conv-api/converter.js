@@ -11,7 +11,7 @@
 
 'use strict;';
 
-const thisThis = this;
+const thisModule = exports;
 const trans = require('./transformers');
 
 /* types */
@@ -415,5 +415,5 @@ exports.encode = function exportsEncode(type, chars) {
 // Converts data of type `srcType` to data of type `dstType`.
 // `srcData` may be a JavaScript String, or node.js Buffer, depending on the corresponding type.
 exports.convert = function convert(srcType, srcData, dstType) {
-  return thisThis.encode(dstType, thisThis.decode(srcType, srcData));
+  return thisModule.encode(dstType, thisModule.decode(srcType, srcData));
 };

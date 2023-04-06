@@ -13,7 +13,7 @@ const emitCss = require('./emitcss');
 const id = require('./identifiers');
 
 const thisFileName = 'utilities.js: ';
-const thisThis = this;
+const thisModule = exports;
 
 /* translate (implied) phrase beginning character and length to actual first and last character indexes */
 /* used by multiple phrase handling functions */
@@ -427,9 +427,9 @@ exports.charsToHex = function (chars, beg, len) {
   }
   const bounds = getBounds(chars.length, beg, len);
   if (bounds.end > bounds.beg) {
-    ret += `\\x${thisThis.charToHex(chars[bounds.beg])}`;
+    ret += `\\x${thisModule.charToHex(chars[bounds.beg])}`;
     for (let i = bounds.beg + 1; i < bounds.end; i += 1) {
-      ret += `,\\x${thisThis.charToHex(chars[i])}`;
+      ret += `,\\x${thisModule.charToHex(chars[i])}`;
     }
   }
   return ret;
@@ -468,7 +468,7 @@ exports.charsToUnicode = function (chars, beg, len) {
       if (isUnicode(chars[i])) {
         ret += `&#${chars[i]};`;
       } else {
-        ret += ` U+${thisThis.charToHex(chars[i])}`;
+        ret += ` U+${thisModule.charToHex(chars[i])}`;
       }
     }
   }
@@ -482,9 +482,9 @@ exports.charsToJsUnicode = function (chars, beg, len) {
   }
   const bounds = getBounds(chars.length, beg, len);
   if (bounds.end > bounds.beg) {
-    ret += `\\u${thisThis.charToHex(chars[bounds.beg])}`;
+    ret += `\\u${thisModule.charToHex(chars[bounds.beg])}`;
     for (let i = bounds.beg + 1; i < bounds.end; i += 1) {
-      ret += `,\\u${thisThis.charToHex(chars[i])}`;
+      ret += `,\\u${thisModule.charToHex(chars[i])}`;
     }
   }
   return ret;
@@ -501,7 +501,7 @@ exports.charsToAscii = function (chars, beg, len) {
     if (char >= 32 && char <= 126) {
       ret += String.fromCharCode(char);
     } else {
-      ret += `\\x${thisThis.charToHex(char)}`;
+      ret += `\\x${thisModule.charToHex(char)}`;
     }
   }
   return ret;
@@ -518,13 +518,13 @@ exports.charsToAsciiHtml = function (chars, beg, len) {
     char = chars[i];
     if (char < 32 || char === 127) {
       /* control characters */
-      html += `<span class="${style.CLASS_CTRLCHAR}">${thisThis.asciiChars[char]}</span>`;
+      html += `<span class="${style.CLASS_CTRLCHAR}">${thisModule.asciiChars[char]}</span>`;
     } else if (char > 127) {
       /* non-ASCII */
-      html += `<span class="${style.CLASS_CTRLCHAR}">U+${thisThis.charToHex(char)}</span>`;
+      html += `<span class="${style.CLASS_CTRLCHAR}">U+${thisModule.charToHex(char)}</span>`;
     } else {
       /* printing ASCII, 32 <= char <= 126 */
-      html += thisThis.asciiChars[char];
+      html += thisModule.asciiChars[char];
     }
   }
   return html;
