@@ -10,8 +10,6 @@
 
 'use strict;';
 
-const thisThis = this;
-
 /* decoding error codes */
 const NON_SHORTEST = 0xfffffffc;
 const TRAILING = 0xfffffffd;
@@ -795,10 +793,10 @@ exports.uint32le = {
 // Uses the node.js Buffer's native "utf16le" capabilites.
 exports.string = {
   encode(chars) {
-    return thisThis.utf16le.encode(chars).toString('utf16le');
+    return exports.utf16le.encode(chars).toString('utf16le');
   },
   decode(str) {
-    return thisThis.utf16le.decode(Buffer.from(str, 'utf16le'), 0);
+    return exports.utf16le.decode(Buffer.from(str, 'utf16le'), 0);
   },
 };
 
