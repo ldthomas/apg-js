@@ -158,9 +158,6 @@ const validateSrc = function validateSrc(type, data) {
     }
     return ret;
   }
-  if (typeof type !== 'string' || type === '') {
-    throw new TypeError(`type: "${type}" not recognized`);
-  }
   const ret = getType(type.toUpperCase());
   if (ret.base64) {
     /* handle base 64 */

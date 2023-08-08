@@ -41,6 +41,7 @@ module.exports = {
     str += 'UINT32   (alias for UINT32BE)\n';
     str += 'UINT32BE\n';
     str += 'UINT32LE\n';
+    str += 'STRING\n';
     str += 'ESCAPED\n';
     str += '\n';
     str += 'Type notes:\n';
