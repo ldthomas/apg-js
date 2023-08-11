@@ -13,7 +13,6 @@
 
 const { Buffer } = require('node:buffer');
 
-const thisThis = this;
 const trans = require('./transformers');
 
 /* types */
@@ -413,6 +412,7 @@ exports.encode = function exportsEncode(type, chars) {
 };
 // Converts data of type `srcType` to data of type `dstType`.
 // `srcData` may be a JavaScript String, or node.js Buffer, depending on the corresponding type.
-exports.convert = function convert(srcType, srcData, dstType) {
-  return thisThis.encode(dstType, thisThis.decode(srcType, srcData));
+const convert = function convert(srcType, srcData, dstType) {
+  return exports.encode(dstType, exports.decode(srcType, srcData));
 };
+exports.convert = convert;
