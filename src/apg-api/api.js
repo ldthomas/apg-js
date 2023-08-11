@@ -27,6 +27,7 @@
 // - JavaScript string
 // - Array of integer character codes
 module.exports = function api(src) {
+  const { Buffer } = require('node:buffer');
   const thisFileName = 'api.js: ';
   const thisObject = this;
 

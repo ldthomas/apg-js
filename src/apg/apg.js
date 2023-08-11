@@ -27,11 +27,11 @@
 // - The final target parser: The user then develops the final target parser using the generated target grammar
 // object and the APG parsing library, **apg-lib**.
 module.exports = function apg(args) {
-  const fs = require('fs');
+  const fs = require('node:fs');
   const ApiCtor = require('../apg-api/api');
   const getConfig = require('./command-line');
   const thisFileName = 'apg.js: ';
-  const util = require('util');
+  const util = require('node:util');
   function logErrors(api, header) {
     console.log('\nORIGINAL GRAMMAR:');
     console.log(api.linesToAscii());

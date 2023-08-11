@@ -11,7 +11,7 @@ module.exports = function cssToJs(inFile, outFile) {
     return filename.slice(((filename.lastIndexOf('.') - 1) >>> 0) + 2);
   }
 
-  const fs = require('fs');
+  const fs = require('node:fs');
   try {
     /* validate arguments */
     if (!inFile) {

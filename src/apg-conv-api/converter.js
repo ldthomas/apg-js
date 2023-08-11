@@ -11,6 +11,8 @@
 
 'use strict;';
 
+const { Buffer } = require('node:buffer');
+
 const thisThis = this;
 const trans = require('./transformers');
 

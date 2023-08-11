@@ -13,8 +13,9 @@
 // `./bin/apg.sh -- help`<br>
 // to see all the options.
 module.exports = function commandLine(args) {
-  const fs = require('fs');
-  const path = require('path');
+  const fs = require('node:fs');
+  const path = require('node:path');
+  const { Buffer } = require('node:buffer');
   const converter = require('../apg-conv-api/converter');
   const helpScreen = function helpScreen(helpArgs) {
     let help = 'Usage: apg options\n';

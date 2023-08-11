@@ -10,6 +10,8 @@
 
 'use strict;';
 
+const { Buffer } = require('node:buffer');
+
 /* decoding error codes */
 const NON_SHORTEST = 0xfffffffc;
 const TRAILING = 0xfffffffd;
