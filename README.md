@@ -1,26 +1,26 @@
 # JavaScript APG
 
-## What's New
+## 4.1.4 Release Notes
 
-`apg-js` obsoletes `apg-js2`, `apg-js2-lib`, `apg-js2-exp`, `apg-js2-api`, `apg-conv` and `apg-conv-api`. It changes them in two significant ways.
+Version 4.1.4 fixes some issues with the global "this" object that has been causing problems for some bundlers.
 
-- It fixes a major problem in the attributes algorithm. Previous versions could fail on large grammars with many or large sets of mutually-recursive rules.
-- It combines all of those packages into a single, easier to manage and maintain package.
-
-In version 4.1.0 and higher, all files have been updated for compliance with ESLint using the airbnb + prettier configurations.
-Use:
+All dependencies have been moved to devDependencies, removing the need for any globally installed packages.
+Use
 
 ```
 npm install --production apg-js
 ```
 
-to prevent installation of ESLint development and configuration modules.
-
-Version 4.1.2 simply replaces five instances of "module.exports = function exports(" with "module.exports = function exfn(". ESLint requires a name here but the name "exports" causes conflicts in some bundlers.
+to prevent installation of devDependencies.
 
 ## Overview
 
 `apg-js` is the JavaScript version of APG, an ABNF Parser Generator. APG generates recursive-descent parsers directly from a superset of [ABNF](https://tools.ietf.org/html/rfc5234) (SABNF). Visit the [APG](https://sabnf.com/) website for a complete [overview](https://sabnf.com/overview/) of APG and SABNF.
+
+`apg-js` obsoletes `apg-js2`, `apg-js2-lib`, `apg-js2-exp`, `apg-js2-api`, `apg-conv` and `apg-conv-api`. It changes them in two significant ways.
+
+- It fixes a major problem in the attributes algorithm. Previous versions could fail on large grammars with many or large sets of mutually-recursive rules.
+- It combines all of those packages into a single, easier to manage and maintain package.
 
 ## Documentation
 
@@ -65,9 +65,6 @@ The library and css bundles are in the `./dist` directory.
 The bundles can all be regenerated with:
 
 ```
-npm install -g browserify@17.0.0
-npm install -g minify@7.0.1
-npm install -g less@4.1.1
 npm run bundle-apg-conv-api
 npm run bundle-apg-lib
 npm run bundle-apg-api
@@ -80,9 +77,7 @@ npm run bundle-apg-lib-css
 The code documentation is in [docco](http://ashkenas.com/docco/) format and can be generated with:
 
 ```
-npm install -g docco@0.8.1
-./bin/docco-gen.sh
+npm run docco
 ```
 
-(Higher versions of docco may work, but some lower versions definitely do not.)
 The documentation is then at `./docs/index.html` or see it [here](https://sabnf.com/docs/apg-js/) at the [APG](https://sabnf.com/) website.

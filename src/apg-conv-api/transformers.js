@@ -504,7 +504,7 @@ exports.utf16be = {
 };
 
 // The UTF16LE algorithms.
-const utf16le = {
+exports.utf16le = {
   encode(chars) {
     const bytes = [];
     let char;
@@ -574,8 +574,6 @@ const utf16le = {
     return chars;
   },
 };
-
-exports.utf16le = utf16le;
 
 // The UTF32BE algorithms.
 exports.utf32be = {
@@ -797,10 +795,10 @@ exports.uint32le = {
 // Uses the node.js Buffer's native "utf16le" capabilites.
 exports.string = {
   encode(chars) {
-    return utf16le.encode(chars).toString('utf16le');
+    return exports.utf16le.encode(chars).toString('utf16le');
   },
   decode(str) {
-    return utf16le.decode(Buffer.from(str, 'utf16le'), 0);
+    return exports.utf16le.decode(Buffer.from(str, 'utf16le'), 0);
   },
 };
 
