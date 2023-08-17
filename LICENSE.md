@@ -1,7 +1,7 @@
 ## [2-Clause BSD License](https://opensource.org/licenses/BSD-2-Clause)
 
 <p>
-Copyright (c) 2021 Lowell D. Thomas<br>
+Copyright (c) 2023 Lowell D. Thomas<br>
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without

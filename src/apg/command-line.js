@@ -13,9 +13,9 @@
 // `./bin/apg.sh -- help`<br>
 // to see all the options.
 module.exports = function commandLine(args) {
-  const fs = require('node:fs');
-  const path = require('node:path');
-  const { Buffer } = require('node:buffer');
+  const fs = require('fs');
+  const path = require('path');
+  const { Buffer } = require('buffer');
   const converter = require('../apg-conv-api/converter');
   const helpScreen = function helpScreen(helpArgs) {
     let help = 'Usage: apg options\n';
@@ -94,6 +94,7 @@ module.exports = function commandLine(args) {
       const kv = args[i].split('=');
       if (kv.length === 2) {
         key = kv[0].toLowerCase();
+        // eslint-disable-next-line prefer-destructuring
         value = kv[1];
       } else if (kv.length === 1) {
         key = kv[0].toLowerCase();

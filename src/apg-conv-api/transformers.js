@@ -10,7 +10,7 @@
 
 'use strict;';
 
-const { Buffer } = require('node:buffer');
+const { Buffer } = require('buffer');
 
 /* decoding error codes */
 const NON_SHORTEST = 0xfffffffc;

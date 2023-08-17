@@ -16,7 +16,7 @@
 module.exports = function exfn() {
   'use strict;';
 
-  const { Buffer } = require('node:buffer');
+  const { Buffer } = require('buffer');
   const SRC_FILEL = '--src';
   const SRC_FILES = '-s';
   const SRC_TYPEL = '--src-type';
@@ -36,7 +36,7 @@ module.exports = function exfn() {
   let srcFile = '';
   let dstFile = '';
   let errFile = '';
-  const fs = require('node:fs');
+  const fs = require('fs');
   const api = require('../apg-conv-api/node-exports');
   const help = require('./help');
   const { convert } = api.converter;

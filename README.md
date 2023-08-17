@@ -2,16 +2,21 @@
 
 ## 4.1.4 Release Notes
 
-Version 4.1.4 fixes some issues with the global "this" object that has been causing problems for some bundlers.
+Version 4.1.4 fixes some issues that have been causing problems for some bundlers and/or development tools.
+`./src/apg-conv-api/converter.js`, `./src/apg-conv-api/transformers.js` and `./src/apg-lib/utilities.js` now refer
+explicitly to the exported functions rather than relying on a saved copy of the `this` reference.
+Also, use of the global `Buffer` object has been replaced with
 
-All dependencies have been moved to devDependencies, removing the need for any globally installed packages.
-Use
+> const { Buffer } = require('buffer');
 
-```
-npm install --production apg-js
-```
+and similary for `fs` and other global `node.js` properties, as recommended in the Node.js v20.5.1 documentation.
+(_Note that `require('node:buffer')` causes problems with using `browerify` to bundle the libraries for web page use.
+Removing the `node:` prefix solves that problem without causing problems with the bundle usage. Thanks to contributions
+in the GitHub issue #13 thread for this suggestion._)
 
-to prevent installation of devDependencies.
+This updated version of `apg-js` has been tested with all of the examples in [apg-js-examples](https://github.com/ldthomas/apg-js-examples). All examples including the web page examples work as expected.
+
+Also, all dependencies have been moved to devDependencies, removing the need for any globally installed packages.
 
 ## Overview
 
@@ -24,22 +29,22 @@ to prevent installation of devDependencies.
 
 ## Documentation
 
-This package is meant to assist other parsing applications and is normally not installed by itself, rather installed along with those other applications. For details and many examples of using of the libraries, both in node.js and browser applications, see `apg-js-examples` at [GitHub](https://github.com/ldthomas/apg-js-examples) or [npmjs](https://www.npmjs.com/package/apg-js-examples).
-However, it does provide access to two, node.js applications, `apg` and `apg-conv`.
+This package is meant to assist other parsing applications and is normally not installed by itself, rather installed along with those other applications. For details and many examples of using of the libraries, both in `node.js` and browser web page applications, see `apg-js-examples` at [GitHub](https://github.com/ldthomas/apg-js-examples) or [npmjs](https://www.npmjs.com/package/apg-js-examples).
+However, it does provide access to two, `node.js` applications, `apg` and `apg-conv`.
 
 ### Applications
 
 `apg` is the parser generator. To see its usage run,
 
-> `npm run apg`
+> `npm run apg -- --help`
 
 `apg-conv` is a data conversion application. To see its usage run,
 
-> `npm run apg-conv`
+> `npm run apg-conv -- --help`
 
 ### Libraries
 
-This package also contains four libraries that can be used in either node.js or browser applications.
+This package contains four libraries that can be used in either `node.js` or browser applications.
 The libraries depend upon one another and the dependency tree looks like so:
 
 ```
@@ -62,7 +67,7 @@ The library and css bundles are in the `./dist` directory.
 ./dist/apg-lib-bundle.css
 ```
 
-The bundles can all be regenerated with:
+The bundles can all be regenerated with the scripts:
 
 ```
 npm run bundle-apg-conv-api
