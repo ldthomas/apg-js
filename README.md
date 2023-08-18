@@ -1,8 +1,8 @@
 # JavaScript APG
 
-## 4.1.4 Release Notes
+## 4.2.0 Release Notes
 
-Version 4.1.4 fixes some issues that have been causing problems for some bundlers and/or development tools.
+Version 4.2.0 fixes some issues that have been causing problems for some bundlers and/or development tools.
 `./src/apg-conv-api/converter.js`, `./src/apg-conv-api/transformers.js` and `./src/apg-lib/utilities.js` now refer
 explicitly to the exported functions rather than relying on a saved copy of the `this` reference.
 Also, use of the global `Buffer` object has been replaced with
