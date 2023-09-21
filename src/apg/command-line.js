@@ -54,7 +54,7 @@ module.exports = function commandLine(args) {
     return help;
   };
   const version = function version() {
-    return 'JavaScript APG, version 4.0.0\nCopyright (C) 2021 Lowell D. Thomas, all rights reserved\n';
+    return 'JavaScript APG, version 4.2.1\nCopyright (C) 2023 Lowell D. Thomas, all rights reserved\n';
   };
   const STRICTL = '--strict';
   const STRICTS = '-s';

@@ -590,6 +590,13 @@ module.exports = function parser() {
     let repPhrase;
     let repCount;
     const op = opcodes[opIndex];
+    if (op.max === 0) {
+      // this is an empty-string acceptor
+      // deprecated: use the TLS empty string operator, "", instead
+      sysData.state = id.EMPTY;
+      sysData.phraseLength = 0;
+      return;
+    }
     repCharIndex = phraseIndex;
     repPhrase = 0;
     repCount = 0;

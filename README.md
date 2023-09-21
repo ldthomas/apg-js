@@ -1,5 +1,28 @@
 # JavaScript APG
 
+## 4.2.1 Release Notes
+
+Some ABNF grammar authors will use zero repetitions as an explicit empty string acceptor.
+That is, one or the other of something like,
+
+> char = %d33-127
+> empty1 = 0char
+> empty2 = 0"x"
+
+Previous version of APG have rejected zero repititions as an empty string acceptor in favor of
+the more intuitive and simpler to produce and simpler to process empty literal string
+
+> empty = ""
+
+`apg-js` version 4.2.0 and lower neglects to reject the zero repetitions form and, unfortunately,
+it only sometimes actually accepts an empty string and sometimes fails.
+Version 4.2.1 corrects this. Zero repetitions are allowed as explicit empty string acceptors and
+are processed correctly.
+
+Note, however, that zero repetitions is deprecated in that not all implementations of APG accept it
+and that is it is slightly less efficient to implement.
+Favored is the more streamlined empty literal string, `""`
+
 ## 4.2.0 Release Notes
 
 Version 4.2.0 fixes some issues that have been causing problems for some bundlers and/or development tools.
