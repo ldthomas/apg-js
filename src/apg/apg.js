@@ -65,7 +65,7 @@ module.exports = function apg(args) {
     }
 
     /* parse the grammar - the syntax phase */
-    api.parse(config.strict);
+    api.parse(config.strict, config.lite);
     if (api.errors.length) {
       logErrors(api, 'GRAMMAR SYNTAX ERRORS');
       throw new Error(`${thisFileName}grammar has syntax errors`);

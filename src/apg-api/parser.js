@@ -82,7 +82,7 @@ module.exports = function exportParser() {
   };
   /* Parse the grammar - the syntax phase. */
   /* SABNF grammar syntax errors are caught and reported here. */
-  this.syntax = function syntax(chars, lines, errors, strict, trace) {
+  this.syntax = function syntax(chars, lines, errors, strict, lite, trace) {
     if (trace) {
       if (trace.traceObject !== 'traceObject') {
         throw new TypeError(`${thisFileName}trace argument is not a trace object`);
@@ -92,6 +92,7 @@ module.exports = function exportParser() {
     const data = {};
     data.errors = errors;
     data.strict = !!strict;
+    data.lite = !!lite;
     data.lines = lines;
     data.findLine = findLine;
     data.charsLength = chars.length;

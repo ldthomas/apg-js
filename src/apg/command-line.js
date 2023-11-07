@@ -27,6 +27,7 @@ module.exports = function commandLine(args) {
     help += '-h, --help                 : print this help screen\n';
     help += '-v, --version              : display version information\n';
     help += '-s, --strict               : only ABNF grammar (RFC 5234 & 7405) allowed, no Superset features\n';
+    help += '-l, --lite                 : generate an apg-lite ESM grammar object';
     help += '-i <path>[,<path>[,...]]   : input file(s)*\n';
     help += '--in=<path>[,<path>[,...]] : input file(s)*\n';
     help += '-o <path>                  : output filename**\n';
@@ -54,10 +55,12 @@ module.exports = function commandLine(args) {
     return help;
   };
   const version = function version() {
-    return 'JavaScript APG, version 4.2.1\nCopyright (C) 2023 Lowell D. Thomas, all rights reserved\n';
+    return 'JavaScript APG, version 4.3.0\nCopyright (C) 2023 Lowell D. Thomas, all rights reserved\n';
   };
   const STRICTL = '--strict';
   const STRICTS = '-s';
+  const LITEL = '--lite';
+  const LITES = '-l';
   const HELPL = '--help';
   const HELPS = '-h';
   const VERSIONL = '--version';
@@ -77,6 +80,7 @@ module.exports = function commandLine(args) {
     version: '',
     error: '',
     strict: false,
+    lite: false,
     noAttrs: false,
     displayRules: false,
     displayRuleDependencies: false,
@@ -126,6 +130,11 @@ module.exports = function commandLine(args) {
         case STRICTL:
         case STRICTS:
           config.strict = true;
+          i += 1;
+          break;
+        case LITEL:
+        case LITES:
+          config.lite = true;
           i += 1;
           break;
         case INL:

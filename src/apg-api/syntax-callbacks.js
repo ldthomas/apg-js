@@ -183,6 +183,12 @@ module.exports = function exfn() {
             char: phraseIndex,
             msg: 'Positive look-behind operator(&&) found - strict ABNF specified.',
           });
+        } else if (data.lite) {
+          data.errors.push({
+            line: data.findLine(data.lines, phraseIndex, data.charsLength),
+            char: phraseIndex,
+            msg: 'Positive look-behind operator(&&) found - apg-lite specified.',
+          });
         }
         break;
       default:
@@ -203,6 +209,12 @@ module.exports = function exfn() {
             line: data.findLine(data.lines, phraseIndex, data.charsLength),
             char: phraseIndex,
             msg: 'Negative look-behind operator(!!) found - strict ABNF specified.',
+          });
+        } else if (data.lite) {
+          data.errors.push({
+            line: data.findLine(data.lines, phraseIndex, data.charsLength),
+            char: phraseIndex,
+            msg: 'Negative look-behind operator(!!) found - apg-lite specified.',
           });
         }
         break;
@@ -225,6 +237,12 @@ module.exports = function exfn() {
             char: phraseIndex,
             msg: 'Beginning of string anchor(%^) found - strict ABNF specified.',
           });
+        } else if (data.lite) {
+          data.errors.push({
+            line: data.findLine(data.lines, phraseIndex, data.charsLength),
+            char: phraseIndex,
+            msg: 'Beginning of string anchor(%^) found - apg-lite specified.',
+          });
         }
         break;
       default:
@@ -245,6 +263,12 @@ module.exports = function exfn() {
             line: data.findLine(data.lines, phraseIndex, data.charsLength),
             char: phraseIndex,
             msg: 'End of string anchor(%$) found - strict ABNF specified.',
+          });
+        } else if (data.lite) {
+          data.errors.push({
+            line: data.findLine(data.lines, phraseIndex, data.charsLength),
+            char: phraseIndex,
+            msg: 'End of string anchor(%$) found - apg-lite specified.',
           });
         }
         break;
@@ -267,6 +291,13 @@ module.exports = function exfn() {
             line: data.findLine(data.lines, phraseIndex, data.charsLength),
             char: phraseIndex,
             msg: `Back reference operator(${name}) found - strict ABNF specified.`,
+          });
+        } else if (data.lite) {
+          const name = apglib.utils.charsToString(chars, phraseIndex, result.phraseLength);
+          data.errors.push({
+            line: data.findLine(data.lines, phraseIndex, data.charsLength),
+            char: phraseIndex,
+            msg: `Back reference operator(${name}) found - apg-lite specified.`,
           });
         }
         break;

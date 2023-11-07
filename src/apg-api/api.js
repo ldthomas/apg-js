@@ -347,11 +347,11 @@ module.exports = function api(src) {
   //
   // <i>(*)NOTE: the trace option was used primarily during development.
   // Error detection and reporting is now fairly robust and tracing should be unnecessary. Use at your own peril.</i>
-  this.parse = function parse(strict, trace) {
+  this.parse = function parse(strict, lite, trace) {
     if (!isScanned) {
       throw new Error(`${thisFileName}grammar not scanned`);
     }
-    parser.syntax(this.chars, this.lines, this.errors, strict, trace);
+    parser.syntax(this.chars, this.lines, this.errors, strict, lite, trace);
     isParsed = true;
   };
   // Translate the SABNF grammar syntax into the opcodes that will guide the parser for this grammar.
