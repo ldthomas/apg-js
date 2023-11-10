@@ -106,8 +106,12 @@ module.exports = function apg(args) {
 
     /* generate a JavaScript parser, if requested */
     if (config.outfd) {
-      fs.writeSync(config.outfd, api.toSource(config.funcName));
-      console.log(`\nJavaScript parser generated: ${config.outFilename}`);
+      fs.writeSync(config.outfd, api.toSource(config.lite, config.funcName));
+      if (config.lite) {
+        console.log(`\napg-lite grammar object generated: ${config.outFilename}`);
+      } else {
+        console.log(`\napg-js grammar object generated: ${config.outFilename}`);
+      }
     }
   } catch (e) {
     let msg = 'EXCEPTION THROWN: ';

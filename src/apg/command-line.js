@@ -27,7 +27,7 @@ module.exports = function commandLine(args) {
     help += '-h, --help                 : print this help screen\n';
     help += '-v, --version              : display version information\n';
     help += '-s, --strict               : only ABNF grammar (RFC 5234 & 7405) allowed, no Superset features\n';
-    help += '-l, --lite                 : generate an apg-lite ESM grammar object';
+    help += '-l, --lite                 : generate an apg-lite ESM grammar object\n';
     help += '-i <path>[,<path>[,...]]   : input file(s)*\n';
     help += '--in=<path>[,<path>[,...]] : input file(s)*\n';
     help += '-o <path>                  : output filename**\n';
@@ -48,10 +48,9 @@ module.exports = function commandLine(args) {
     help += '    If the output file name does not have a ".js" extension,\n';
     help += '    the existing extension, if any, is stripped and ".js" is added.\n';
     help += '*** Grammar function name is optional.\n';
-    help += '    If absent, use module.exports for node.js application usage.\n';
-    help += '    If present, must be a valid JavaScript function name for web page usage.\n';
-    help += "    No testing is done (it's complicated). If the name is not valid\n";
-    help += '    you will find out when you try to use it.\n';
+    help += '    If present, must be a valid JavaScript function name\n';
+    help += '    If absent, uses "module.exports" for apg-js application\n';
+    help += '    or "export default" for apg-lite application.\n';
     return help;
   };
   const version = function version() {

@@ -448,14 +448,14 @@ module.exports = function api(src) {
   };
   // Returns a parser grammar object constructor function as a JavaScript string.
   // This object can then be used to construct a parser.
-  this.toSource = function toSource(name) {
+  this.toSource = function toSource(lite, name) {
     if (!haveAttributes) {
       throw new Error(`${thisFileName}can't generate parser source - must be preceeded by call to attributes()`);
     }
     if (attributeErrors) {
       throw new Error(`${thisFileName}can't generate parser source - attributes have ${attributeErrors} errors`);
     }
-    return parser.generateSource(this.chars, this.lines, this.rules, this.udts, name);
+    return parser.generateSource(this.chars, this.lines, this.rules, this.udts, lite, name);
   };
   // Returns a parser grammar object.
   // This grammar object may be used by the application to construct a parser.
