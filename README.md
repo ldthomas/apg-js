@@ -1,12 +1,22 @@
 # JavaScript APG
 
+## 4.3.0 Release Notes
+
+Version 4.3.0 adds support for [apg-lite](https://github.com/ldthomas/apg-lite),
+a new, light-weight version of the parsers built from this library.
+The parser generator (`src/apg/apg.js`) has a new option, `--lite`, that will
+generate grammar objects for the `apg-lite` parsers.
+See the documentation for `apg-lite` for a complete description.
+
+Version 4.3.0 makes no other changes to the previous version other than adding the new `apg-lite` feature.
+
 ## 4.2.1 Release Notes
 
 Some ABNF grammar authors will use zero repetitions as an explicit empty string acceptor.
 That is, one or the other of something like,
 
-> char = %d33-127
-> empty1 = 0char
+> char = %d33-127  
+> empty1 = 0char  
 > empty2 = 0"x"
 
 Previous version of APG have rejected zero repititions as an empty string acceptor in favor of
