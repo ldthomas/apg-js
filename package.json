@@ -6,6 +6,7 @@
   "scripts": {
     "test": "cat ./dist/desc.txt",
     "apg": "./bin/apg.sh",
+    "regen": "./bin/a.sh && ./bin/b.sh && ./bin/c.sh && ./bin/b.sh  && ./bin/d.sh",
     "apg-conv": "./bin/apg-conv.sh",
     "bundle-apg-conv-api": "./bin/apg-conv-api-bundle.sh",
     "bundle-apg-lib": "./bin/apg-lib-bundle.sh",
