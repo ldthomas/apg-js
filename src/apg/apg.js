@@ -106,7 +106,7 @@ module.exports = function apg(args) {
 
     /* generate a JavaScript parser, if requested */
     if (config.outfd) {
-      fs.writeSync(config.outfd, api.toSource(config.lite, config.funcName));
+      fs.writeSync(config.outfd, api.toSource(config));
       if (config.lite) {
         console.log(`\napg-lite grammar object generated: ${config.outFilename}`);
       } else {

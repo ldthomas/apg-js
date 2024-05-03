@@ -27,39 +27,51 @@ module.exports = function commandLine(args) {
     help += '-h, --help                 : print this help screen\n';
     help += '-v, --version              : display version information\n';
     help += '-s, --strict               : only ABNF grammar (RFC 5234 & 7405) allowed, no Superset features\n';
-    help += '-l, --lite                 : generate an apg-lite ESM grammar object\n';
-    help += '-i <path>[,<path>[,...]]   : input file(s)*\n';
-    help += '--in=<path>[,<path>[,...]] : input file(s)*\n';
-    help += '-o <path>                  : output filename**\n';
-    help += '--out=<path>               : output filename**\n';
-    help += '-n <function name>         : the grammar function name***\n';
-    help += '--name=<function name>     : the grammar function name***\n';
+    help += '-l, --lite                 : generate an apg-lite ES Modules grammar object*\n';
+    help += '-t, --typescript           : generate a typescript grammar object*\n';
+    help += '-i <path>[,<path>[,...]]   : input file(s)**\n';
+    help += '--in=<path>[,<path>[,...]] : input file(s)**\n';
+    help += '-o <path>                  : output filename***\n';
+    help += '--out=<path>               : output filename***\n';
+    help += '-n <function name>         : the grammar function name****\n';
+    help += '--name=<function name>     : the grammar function name****\n';
     help += '--display-rules            : display the rule names\n';
     help += '--display-rule-dependencies: display => rules referenced <= rules referring to this rule\n';
     help += '--display-attributes       : display the attributes\n';
     help += '\n';
     help += 'Options are case insensitive.\n';
-    help += '*   Multiple input files allowed.\n';
+    help += '*   --typescript - a typescript grammar object is exported with\n';
+    help += '        export function grammar(){}\n';
+    help += '*   --lite - an apg-lite ES Modules grammar object is exported with\n';
+    help += '        export default function grammar(){}\n';
+    help += '    --typescript and --lite are mutually exclusive and\n';
+    help += '    --typescript superceeds --lite if both are specified.\n';
+    help += '    If neither are specified a CommonJS object is exported with.\n';
+    help += '        module.exports = function grammar(){}\n';
+    help += '**  Multiple input files allowed.\n';
     help += '    Multiple file names must be comma separated with no spaces.\n';
     help += '    File names from multiple input options are concatenated.\n';
     help += '    Content of all resulting input files is concatenated.\n';
-    help += '**  Output file name is optional.\n';
+    help += '*** Output file name is optional.\n';
     help += '    If no output file name is given, no parser is generated.\n';
-    help += '    If the output file name does not have a ".js" extension,\n';
-    help += '    the existing extension, if any, is stripped and ".js" is added.\n';
-    help += '*** Grammar function name is optional.\n';
-    help += '    If present, must be a valid JavaScript function name\n';
-    help += '    If absent, uses "module.exports" for apg-js application\n';
-    help += '    or "export default" for apg-lite application.\n';
+    help += '    If the output file name is specified, the existing extension,\n';
+    help += '    if any, is stripped and ".js" is added unless the --typescript option\n';
+    help += '    is present in which case ".ts" is added.\n';
+    help += '****If --name=fname is present, a named function is created\n';
+    help += '      const fname = function grammar(){}\n';
+    help += '    typically for scripting directly into a web page.\n';
+    help += '    \n';
     return help;
   };
   const version = function version() {
-    return 'JavaScript APG, version 4.3.0\nCopyright (C) 2023 Lowell D. Thomas, all rights reserved\n';
+    return 'JavaScript APG, version 4.4.0\nCopyright (C) 2024 Lowell D. Thomas, all rights reserved\n';
   };
   const STRICTL = '--strict';
   const STRICTS = '-s';
   const LITEL = '--lite';
   const LITES = '-l';
+  const TYPEL = '--typescript';
+  const TYPES = '-t';
   const HELPL = '--help';
   const HELPS = '-h';
   const VERSIONL = '--version';
@@ -80,6 +92,7 @@ module.exports = function commandLine(args) {
     error: '',
     strict: false,
     lite: false,
+    typescript: false,
     noAttrs: false,
     displayRules: false,
     displayRuleDependencies: false,
@@ -136,6 +149,11 @@ module.exports = function commandLine(args) {
           config.lite = true;
           i += 1;
           break;
+        case TYPEL:
+        case TYPES:
+          config.typescript = true;
+          i += 1;
+          break;
         case INL:
         case INS:
           if (!value) {
@@ -180,13 +198,11 @@ module.exports = function commandLine(args) {
     config.outfd = null;
     if (config.outFilename) {
       const info = path.parse(config.outFilename);
-      if (info.ext !== 'js') {
-        /* strip the extension and add .js */
-        if (info.dir) {
-          config.outFilename = `${info.dir}/${info.name}.js`;
-        } else {
-          config.outFilename = `${info.name}.js`;
-        }
+      const ext = config.typescript ? 'ts' : 'js';
+      if (info.dir) {
+        config.outFilename = `${info.dir}/${info.name}.${ext}`;
+      } else {
+        config.outFilename = `${info.name}.${ext}`;
       }
       config.outfd = fs.openSync(config.outFilename, 'w');
     }
