@@ -1,5 +1,12 @@
 # JavaScript APG
 
+## 4.4.0 Release Notes
+
+Version 4.4.0 adds an option, `--typescript`, to the APG genererator which will
+generate a `typescript`-compatible grammar object. The new script `regen` will
+regenerate all the grammar objects in place anytime a change is made to any of
+the ABNF grammars or if the generator is modified in any way.
+
 ## 4.3.0 Release Notes
 
 Version 4.3.0 adds support for [apg-lite](https://github.com/ldthomas/apg-lite),
